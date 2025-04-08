@@ -32,8 +32,8 @@
       chdir: /app
   - name: copy the catalogue source file
     ansible.builtin.copy:
-     src: catalogue.service
-     dest: /etc/systemd/system/catalogue.service
+     src: /home/ec2-user/roboshop_ansible/catalogue.service
+     dest: /etc/systemd/system/
 
   - name: daemon reload
     ansible.builtin.systemd:
