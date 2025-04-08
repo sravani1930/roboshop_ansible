@@ -30,10 +30,11 @@
     ansible.builtin.command: npm install
     args:
       chdir: /app
-  - name: copy the catalogue source file
+  - name: Copy catalogue service file
     ansible.builtin.copy:
-     src: /home/ec2-user/roboshop_ansible/catalogue.service
-     dest: /etc/systemd/system/
+     src: catalogue.service
+     dest: /etc/systemd/system/catalogue.service
+     mode: '0644'
 
   - name: daemon reload
     ansible.builtin.systemd:
