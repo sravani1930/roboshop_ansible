@@ -1,0 +1,85 @@
+- name: user server
+  hosts: user
+  become: yes
+  tasks:
+  - name: disbale and enable nodejs
+    ansible.builtin.command: dnf module disable nodejs -y;dnf module enable nodejs:18 -y
+  
+  - name: install nodejs
+    ansible.builtin.package:
+     name: nodejs
+     state: present
+  
+  - name: add user
+    ansible.builtin.user:
+     name: roboshop
+     state: present
+ 
+  - name: create directory
+    ansible.builtin.file:
+     path: /app
+     state: directory
+
+  - name: download the package
+    ansible.builtin.get_url:
+     url: https://roboshop-builds.s3.amazonaws.com/user.zip
+     dest: /tmp/user.zip
+
+  - name: unzip the file
+    ansible.builtin.unarchive:
+      src: /tmp/user.zip
+      dest: /app
+      remote_src: yes
+  
+  - name: install the package
+    ansible.builtin.command: npm install
+    args:
+      chdir: /app
+
+  - name: copy the service file
+    ansible.builtin.copy:
+     src: user.service
+     dest: /etc/systemd/system/user.service
+  
+  - name: daemon reload
+    ansible.builtin.systemd:
+     daemon_reload: true
+
+ 
+  - name: copy repo file
+    ansible.builtin.copy:
+     src: mongodb.repo
+     dest: /etc/yum.repos.d/mongodb.repo
+
+  - name: install mongodb
+    ansible.builtin.package:
+     name: mongodb-org-shell
+     state: present
+
+  - name: get the categories count
+    ansible.builtin.command: mongosh --host mongodb.devopsify.space --quiet --eval 'db = db.getSiblingDB("user"); db.products.count()'
+    register: product_count
+
+  - name: print the count
+    ansible.builtin.debug:
+     msg: "product count: {{product_count}}"
+
+  - name: load user data
+    ansible.builtin.command: mongosh --host mongodb.devopsify.space < /app/schema/user.js
+    when: product_count.stdout == "0" # keep double quotes
+
+  #- name: Unmask the catalogue service
+   # ansible.builtin.systemd:
+    # name: catalogue
+   #  masked: no
+
+  - name: Enable and start the catalogue service
+    ansible.builtin.systemd:
+     name: user
+     enabled: yes
+     state: started
+
+
+
+
+     
