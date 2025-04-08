@@ -75,11 +75,11 @@
      name: catalogue
      masked: no
 
-- name: Enable and start the catalogue service
-  ansible.builtin.systemd:
-    name: catalogue
-    enabled: yes
-    state: started
+  - name: Enable and start the catalogue service
+    ansible.builtin.systemd:
+     name: catalogue
+     enabled: yes
+     state: started
 
 
 
