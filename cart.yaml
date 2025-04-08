@@ -27,9 +27,9 @@
   
   - name: unzip the file
     ansible.builtin.archive:
-    src: /tmp/cart.zip
-    dest: /app
-    remote_src: yes
+     src: /tmp/cart.zip
+     dest: /app
+     remote_src: yes
   
   - name: install npm
     ansible.builtin.command: npm install
