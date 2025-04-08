@@ -1,7 +1,7 @@
-- name: configure
+- name: serverconfiguration
   hosts: redis
   become: yes
-  task:
+  tasks:
   - name: install remirepo
     ansible.builtin.command: dnf install https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y
   - name: enable redis
