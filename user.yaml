@@ -52,7 +52,7 @@
 
   - name: Install MongoDB shell
     ansible.builtin.dnf:
-     name: mongodb-org-shell
+     name: mongodb-org
      state: present
 
   - name: get the categories count
