@@ -57,16 +57,16 @@
      state: present
 
   - name: get the categories count
-    ansible.builtin.command: mongosh --host mongodb.devopsify.space --quiet --eval 'db = db.getSiblingDB("user"); db.products.count()'
+    ansible.builtin.command: mongosh --host mongodb.devopsify.space --quiet --eval 'db = db.getSiblingDB("user"); db.user.count()'
     register: product_count
 
   - name: print the count
     ansible.builtin.debug:
-     msg: "product count: {{product_count}}"
+     msg: "user count: {{user_count}}"
 
   - name: load user data
     ansible.builtin.command: mongosh --host mongodb.devopsify.space < /app/schema/user.js
-    when: product_count.stdout == "0" # keep double quotes
+    when: user_count.stdout == "0" # keep double quotes
 
   #- name: Unmask the catalogue service
    # ansible.builtin.systemd:
