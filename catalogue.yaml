@@ -38,15 +38,15 @@
     ansible.builtin.systemd:
      daemon_reload: true
 
-  - name: enable catalogue
-    ansible.builtin.service:
-     name: catalogue
-     enabled: yes
+ # - name: enable catalogue
+    #ansible.builtin.service:
+    # name: catalogue
+    # enabled: yes
   
-  - name: start catalogue
-    ansible.builtin.service:
-     name: catalogue
-     state: started
+ # - name: start catalogue
+   # ansible.builtin.service:
+   #  name: catalogue
+    # state: started
     
       
   - name: copy repo file
