@@ -1,4 +1,4 @@
-- name: redis server
+- name: redis configure
   hosts: redis
   become: yes
   task:
@@ -23,6 +23,8 @@
      name: redis
      enabled: yes
      state: started
+
+     
     
   
   
