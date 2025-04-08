@@ -3,7 +3,8 @@
   become: yes
   tasks:
   - name: install remirepo
-    ansible.builtin.command: dnf install https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y
+    ansible.builtin.command: dnf install https://rpms.remirepo.net/enterprise/remi-release-9.rpm -y
+
   - name: enable redis
     ansible.builtin.command: dnf module enable redis:remi-6.2 -y
 
