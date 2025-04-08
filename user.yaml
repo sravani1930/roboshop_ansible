@@ -57,7 +57,7 @@
 
   - name: get the categories count
     ansible.builtin.command: mongosh --host mongodb.devopsify.space --quiet --eval 'db = db.getSiblingDB("user"); db.user.count()'
-    register: product_count
+    register: user_count
 
   - name: print the count
     ansible.builtin.debug:
