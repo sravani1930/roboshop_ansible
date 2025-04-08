@@ -1,0 +1,15 @@
+[Unit]
+Description=User Service
+After=network.target
+[Service]
+User=roboshop
+Environment=MONGO=true
+Environment=REDIS_HOST=redis.devopsify.space
+Environment=MONGO_URL="mongodb://mongodb.devopsify.spcae:27017/users"
+ExecStart=/bin/node /app/server.js
+Restart=always
+SyslogIdentifier=user
+
+[Install]
+WantedBy=multi-user.target
+EOF
