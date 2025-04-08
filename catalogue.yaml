@@ -60,7 +60,7 @@
      state: present
 
   - name: load catalogue date
-    ansible.builtin.command: mongo --host mongodb.devopsify.space </app/schema/catalogue.js
+    ansible.builtin.command: mongo --host mongodb.devopsify.space < /app/schema/catalogue.js
 
  
      
