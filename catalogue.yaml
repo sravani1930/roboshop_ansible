@@ -34,21 +34,12 @@
     ansible.builtin.copy:
      src: catalogue.service
      dest: /etc/systemd/system/catalogue.service
+
   - name: daemon reload
     ansible.builtin.systemd:
      daemon_reload: true
 
- # - name: enable catalogue
-    #ansible.builtin.service:
-    # name: catalogue
-    # enabled: yes
-  
- # - name: start catalogue
-   # ansible.builtin.service:
-   #  name: catalogue
-    # state: started
-    
-      
+ 
   - name: copy repo file
     ansible.builtin.copy:
      src: mongodb.repo
@@ -70,10 +61,10 @@
     ansible.builtin.command: mongosh --host mongodb.daws76s.online < /app/schema/catalogue.js
     when: product_count.stdout == "0" # keep double quotes
 
-  - name: Unmask the catalogue service
-    ansible.builtin.systemd:
-     name: catalogue
-     masked: no
+  #- name: Unmask the catalogue service
+   # ansible.builtin.systemd:
+    # name: catalogue
+   #  masked: no
 
   - name: Enable and start the catalogue service
     ansible.builtin.systemd:
