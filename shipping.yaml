@@ -50,6 +50,15 @@
     ansible.builtin.dnf:
      name: mysql
      state: present
+  - name: Ensure /app/schema directory exists
+    file:
+     path: /app/schema
+     state: directory
+
+  - name: Copy shipping SQL
+    copy:
+     src: schema/shipping.sql
+     dest: /app/schema/shipping.sql
 
   - name: check cities schema exist or not
     ansible.builtin.command: mysql -h mysql.devopsify.space -uroot -p{{mysql_password}} -sN -e "SELECT COUNT(*) FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = 'cities'"
