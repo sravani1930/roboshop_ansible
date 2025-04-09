@@ -1,6 +1,8 @@
 - name: shipping server
   hosts: shipping
   become: yes
+  vars:
+   mysql_password: RoboShop@1
   tasks: 
   - name: install maven
     ansible.builtin.command: dnf install maven -y
@@ -44,14 +46,22 @@
      name: mysql
      state: present
 
-  - name: load schema
-    ansible.builtin.command: mysql -h mysql.devopsify.space -uroot -pRoboShop@1 < /app/schema/shipping.sql 
+  - name: check cities schema exist or not
+    ansible.builtin.command: mysql -h mysql.devopsify.space -uroot -p{{mysql_password}} -sN -e "SELECT COUNT(*) FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = 'cities'"
+    register: schema
 
-  - name: enable and start shipping
-    ansible.builtin.systemd:
-     name: shipping
-     enabled: yes
-     state: started
+  - name: print output
+    ansible.builtin.debug:
+     msg: " schema output: {{schema}}"
+
+ # - name: load schema
+ #   ansible.builtin.command: mysql -h mysql.devopsify.space -uroot -pRoboShop@1 < /app/schema/shipping.sql 
+
+ # - name: enable and start shipping
+  #  ansible.builtin.systemd:
+ #    name: shipping
+ #    enabled: yes
+  #   state: started
 
 
       
