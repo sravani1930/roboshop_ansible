@@ -6,7 +6,7 @@ After=network.target
 User=roboshop
 Environment=MONGO=true
 Environment=MONGO_URL="mongodb://mongodb.devopsify.space:27017/catalogue"
-ExecStart=/bin/node /app/server.js
+ExecStart=/usr/bin/node /app/server.js
 Restart=always
 SyslogIdentifier=catalogue
 
