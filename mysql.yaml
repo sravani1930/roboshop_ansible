@@ -2,13 +2,21 @@
   hosts: mysql
   become: yes
   tasks:
-  - name: disable mysql
-    ansible.builtin.command: dnf module disable mysql -y
+  - name: Check if mysql module exists
+    command: dnf module list mysql
+    register: mysql_module_check
+    ignore_errors: true
+
+  - name: Disable MySQL module (if it exists)
+    command: dnf module disable mysql -y
+    when: "'mysql' in mysql_module_check.stdout"
+    become: yes
+
   
   - name: copyrepo file
     ansible.builtin.copy:
      src: mysql.repo
-     dest: /etc/yum.repos.d/mysql.repo
+     dest: /etc/yum.repos.d/mysql.repos
   
   - name: install mysql
     ansible.builtin.package:
