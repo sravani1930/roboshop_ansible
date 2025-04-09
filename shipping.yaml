@@ -69,7 +69,7 @@
 
   - name: touch the file
     ansible.builtin.file:
-     patch: /app/schema/shipping.sql
+     path: /app/schema/shipping.sql
      state: touch 
 
   - name: load schema
