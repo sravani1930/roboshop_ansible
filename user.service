@@ -6,7 +6,7 @@ User=roboshop
 Environment=MONGO=true
 Environment=REDIS_HOST=redis.devopsify.space
 Environment=MONGO_URL="mongodb://mongodb.devopsify.spcae:27017/users"
-ExecStart=/bin/node /app/server.js
+ExecStart=/usr/bin/node /app/server.js
 Restart=always
 SyslogIdentifier=user
 
