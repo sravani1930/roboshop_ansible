@@ -5,7 +5,7 @@
   - name: disable mysql
     ansible.builtin.command:dnf module disable mysql -y
   
-  - name: copy repo file
+  - name: copyrepo file
     ansible.builtin.copy:
      src: mysql.repo
      dest: /etc/yum.repos.d/mysql.repo
