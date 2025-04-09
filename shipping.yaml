@@ -40,7 +40,7 @@
      daemon-reload: true
   
   - name: install mysql
-    ansible.builtin.package:
+    ansible.builtin.dnf:
      name: mysql
      state: present
 
@@ -52,6 +52,6 @@
      name: shipping
      enabled: yes
      state: started
-     
+
 
       
