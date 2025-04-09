@@ -30,4 +30,28 @@
     args: 
      chdir: /app
   
+  - name: copy file
+    ansible.builtin.copy:
+     src: shipping.service
+     dest: /etc/systemd/system/shipping.service
+
+  - name: reload daemon
+    ansible.builtin.systemd:
+     daemon-reload: true
+  
+  - name: install mysql
+    ansible.builtin.package:
+     name: mysql
+     state: present
+
+  - name: load schema
+    ansible.builtin.command: mysql -h mysql.devopsify.space -uroot -pRoboShop@1 < /app/schema/shipping.sql 
+
+  - name: enable and start shipping
+    ansible.builtin.systemd:
+     name: shipping
+     enabled: yes
+     state: started
+     
+
       

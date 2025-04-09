@@ -1,0 +1,14 @@
+[Unit]
+Description=Shipping Service
+After=network.target
+
+[Service]
+User=roboshop
+Environment=CART_ENDPOINT=cart.devopsify.space:8080
+Environment=DB_HOST=mysql.devopsify.spcae
+ExecStart=/bin/java -jar /app/shipping.jar
+Restart=always
+SyslogIdentifier=shipping
+
+[Install]
+WantedBy=multi-user.target
