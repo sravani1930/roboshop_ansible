@@ -16,7 +16,7 @@
   - name: enable and start the rabbitmq
     ansible.builtin.systemd:
      name: rabbitmq-server
-     enables: yes
+     enabled: yes
      state: started
   
   - name: add username and password
