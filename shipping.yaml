@@ -68,7 +68,7 @@
      msg: " schema output: {{schema}}"
 
   - name: load schema
-    ansible.builtin.shell: mysql -h mysql.devopsify.space -uroot -p{{mysql_password}} < /app/schema/shipping.sql 
+    ansible.builtin.shell: mysql -h mysql.devopsify.space -uroot -p{{mysql_password}} < /app/schema/ 
     when: schema.stdout != "1"
 
   - name: enable and start shipping
