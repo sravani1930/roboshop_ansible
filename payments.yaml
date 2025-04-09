@@ -10,7 +10,7 @@
      name: roboshop
   
   - name: create directory
-    anisble.builtin.file:
+    ansible.builtin.file:
      path: /app
      state: directory
   
