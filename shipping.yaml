@@ -54,14 +54,15 @@
     ansible.builtin.debug:
      msg: " schema output: {{schema}}"
 
- # - name: load schema
- #   ansible.builtin.command: mysql -h mysql.devopsify.space -uroot -pRoboShop@1 < /app/schema/shipping.sql 
+  - name: load schema
+    ansible.builtin.shell: "mysql -h mysql.devopsify.space -uroot -p{{mysql_password}} < /app/schema/shipping.sql" 
+    when: schema.stdout != "1"
 
- # - name: enable and start shipping
-  #  ansible.builtin.systemd:
- #    name: shipping
- #    enabled: yes
-  #   state: started
+  - name: enable and start shipping
+    ansible.builtin.systemd:
+     name: shipping
+     enabled: yes
+     state: started
 
 
       
