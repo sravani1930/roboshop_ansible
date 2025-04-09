@@ -20,7 +20,7 @@
      dest: /tmp
   
   - name: unarchive the file
-    anisble.builtin.unarchive:
+    ansible.builtin.unarchive:
      src: /tmp/payment.zip
      dest: /app
   
