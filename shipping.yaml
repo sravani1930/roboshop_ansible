@@ -37,6 +37,11 @@
     args:  
      chdir: /app
   
+  - name: Copy shipping.jar
+    copy:
+     src: shipping.jar
+     dest: /app/shipping.jar
+  
   - name: copy file
     ansible.builtin.copy:
      src: shipping.service
