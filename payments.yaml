@@ -3,7 +3,7 @@
   become: yes
   tasks:
   - name: install python
-    ansible.builtin.command: dnf install python36 gcc python3-devel -y
+    ansible.builtin.shell: dnf install python36 gcc python3-devel -y
   
   - name: add user
     ansible.builtin.user:
