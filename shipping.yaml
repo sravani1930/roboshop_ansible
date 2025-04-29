@@ -78,7 +78,7 @@
      state: touch 
 
   - name: load schema
-    ansible.builtin.shell: mysql -h mysql.devopsify.space -uroot -p{{mysql_password}} < /app/schema/shipping.sql 
+    ansible.builtin.shell: "mysql -h mysql.devopsify.space -uroot -p{{mysql_password}} < /app/schema/shipping.sql" 
     when: schema.stdout != "1"
 
   - name: enable and start shipping
